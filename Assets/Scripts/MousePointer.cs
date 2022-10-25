@@ -13,11 +13,6 @@ public class MousePointer : MonoBehaviour
         instance = this;
     }
 
-    private void Update()
-    {
-        transform.position = MousePointer.GetPosition();
-    }
-
     public static Vector3 GetPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
