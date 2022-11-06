@@ -28,7 +28,7 @@ public class GridSystem
 
     public Vector3 GetWorldPosition(GridPosition gridPosition)
     {
-        return new Vector3(gridPosition.x + 1, 0.1f, gridPosition.z) * cellSize;
+        return new Vector3(gridPosition.x, 0.1f, gridPosition.z) * cellSize;
     }
 
     public GridPosition GetGridPosition(Vector3 worldPosition)
@@ -57,6 +57,15 @@ public class GridSystem
     {
         return gridObjects[gridPosition.x, gridPosition.z];
     }
+
+    public bool IsValidGridPosition(GridPosition gridPosition)
+    {
+        return  gridPosition.x >= 0 &&
+                gridPosition.z >= 0 &&
+                gridPosition.x < width &&
+                gridPosition.z < height;
+
+    }
 }
 
 public struct GridPosition : IEquatable<GridPosition>
@@ -73,6 +82,16 @@ public struct GridPosition : IEquatable<GridPosition>
     public override string ToString()
     {
         return $"{x}, {z}";
+    }
+
+    public static GridPosition operator +(GridPosition a, GridPosition b)
+    {
+        return new GridPosition(a.x + b.x, a.z + b.z);
+    }
+
+    public static GridPosition operator -(GridPosition a, GridPosition b)
+    {
+        return new GridPosition(a.x - b.x, a.z - b.z);
     }
 
     public static bool operator ==(GridPosition a, GridPosition b)
