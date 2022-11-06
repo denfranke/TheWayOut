@@ -28,7 +28,7 @@ public class GridSystem
 
     public Vector3 GetWorldPosition(GridPosition gridPosition)
     {
-        return new Vector3(gridPosition.x, 0.1f, gridPosition.z) * cellSize;
+        return new Vector3(gridPosition.x, 0f, gridPosition.z) * cellSize;
     }
 
     public GridPosition GetGridPosition(Vector3 worldPosition)
@@ -66,6 +66,9 @@ public class GridSystem
                 gridPosition.z < height;
 
     }
+
+    public int Width { get { return width; } }
+    public int Height { get { return height; } }
 }
 
 public struct GridPosition : IEquatable<GridPosition>
