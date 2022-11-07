@@ -13,6 +13,8 @@ public class UnitActionSystem : MonoBehaviour
 
     public static UnitActionSystem Instance { get; private set; }
 
+    private bool isBusy;
+
     private void Awake()
     {
         if (Instance != null)
@@ -27,16 +29,30 @@ public class UnitActionSystem : MonoBehaviour
 
     private void Update()
     {
+        if (isBusy) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             if (!TryHandleUnitSelection() && selectedUnit)
             {
                 GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MousePointer.GetPosition());
                 if(selectedUnit.MoveAction.IsValidActionGridPosition(mouseGridPosition))
-                    selectedUnit.MoveAction.Move(mouseGridPosition);
+                {
+                    selectedUnit.MoveAction.Move(mouseGridPosition, ClearBusy);
+                    SetBusy();
+                }
             }
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            selectedUnit.SpinAction.Spin(ClearBusy);
+            SetBusy();
+        }
     }
+
+    private void SetBusy() { isBusy = true; }
+    private void ClearBusy() { isBusy = false; }
 
     private bool TryHandleUnitSelection()
     {
