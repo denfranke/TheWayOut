@@ -9,11 +9,7 @@ public class UnitSelectedVisual : MonoBehaviour
 
     private void Awake()
     {
-        meshRenderer = GetComponent<MeshRenderer>();    
-    }
-
-    private void Start()
-    {
+        meshRenderer = GetComponent<MeshRenderer>();
         UnitActionSystem.Instance.OnSelectUnitChanged += UnitActionSystem_OnSelectUnitChanged;
         meshRenderer.enabled = false;
     }
