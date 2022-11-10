@@ -37,7 +37,7 @@ public class MoveAction : BaseAction
             unitAnimator.SetBool("IsWalking", false);
         }
 
-        float rotateSpeed = 10f;
+        float rotateSpeed = 30f;
         transform.forward = Vector3.Lerp(transform.forward, moveDirection, Time.deltaTime * rotateSpeed);
     }
 
