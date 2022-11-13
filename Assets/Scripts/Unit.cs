@@ -5,6 +5,8 @@ using System;
 
 public class Unit : MonoBehaviour
 {
+    [SerializeField] private bool isEnemy;
+
     private const int ACTION_POINTS_MAX = 5;
 
     public static event EventHandler OnAnyActionPointsChanged;
@@ -41,8 +43,11 @@ public class Unit : MonoBehaviour
 
     private void TurnSystem_OnTurnChanged(object sender, EventArgs e)
     {
-        actionPoints = ACTION_POINTS_MAX;
-        OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
+        if((isEnemy && !TurnSystem.Instance.IsPlayerTurn) || (!isEnemy && TurnSystem.Instance.IsPlayerTurn))
+        {
+            actionPoints = ACTION_POINTS_MAX;
+            OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     private bool CanSpendActionPointsToTakeAction(BaseAction baseAction)
@@ -68,9 +73,18 @@ public class Unit : MonoBehaviour
             return false;
     }
 
+    public void Damage()
+    {
+        Debug.Log("Damaged");
+    }
+
+    public Vector3 GetWorldPosition() { return transform.position; }
+
     public MoveAction MoveAction { get { return moveAction; } }
     public SpinAction SpinAction { get { return spinAction; } }
     public GridPosition GridPosition { get { return currentGridPosition; } }
     public BaseAction[] BaseActions { get { return baseActions; } }
     public int ActionPoints { get { return actionPoints; } }
+
+    public bool IsEnemy { get { return isEnemy; } }
 }

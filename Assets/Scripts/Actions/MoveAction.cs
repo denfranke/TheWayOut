@@ -32,8 +32,7 @@ public class MoveAction : BaseAction
         }
         else
         {
-            isActive = false;
-            OnActionComplete();
+            ActionComplete();
             unitAnimator.SetBool("IsWalking", false);
         }
 
@@ -43,8 +42,7 @@ public class MoveAction : BaseAction
 
     public override void TakeAction(GridPosition targetPosition, Action OnActionComplete)
     {
-        this.OnActionComplete = OnActionComplete;
-        isActive = true;
+        ActionStart(OnActionComplete);
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(targetPosition);
     }
 
@@ -77,13 +75,7 @@ public class MoveAction : BaseAction
         return validGridPositionList;
     }
 
-    public override string GetActionName()
-    {
-        return "Move";
-    }
+    public override string GetActionName() { return "Move"; }
 
-    public override int GetActionPointsCost()
-    {
-        return 1;
-    }
+    public override int GetActionPointsCost() { return 1; }
 }

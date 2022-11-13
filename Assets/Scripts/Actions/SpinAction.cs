@@ -5,32 +5,23 @@ using System;
 
 public class SpinAction : BaseAction
 {
-    private float totalSpeenAmount;
+    private float totalSpinAmount;
 
     void Update()
     {
         if (!isActive) return;
 
         float spinAmount = 360f * Time.deltaTime;
-        totalSpeenAmount += spinAmount;
+        totalSpinAmount += spinAmount;
         transform.eulerAngles += new Vector3(0, spinAmount, 0);
 
-        if (totalSpeenAmount >= 360)
-        {
-            isActive = false;
-            OnActionComplete();
-        }
-    }
-    public override void TakeAction(GridPosition gridPosition, Action OnActionComplete)
-    {
-        this.OnActionComplete = OnActionComplete;
-        isActive = true;
-        totalSpeenAmount = 0;
+        if (totalSpinAmount >= 360) ActionComplete();
     }
 
-    public override string GetActionName()
+    public override void TakeAction(GridPosition gridPosition, Action OnActionComplete)
     {
-        return "Spin";
+        ActionStart(OnActionComplete);
+        totalSpinAmount = 0;
     }
 
     public override List<GridPosition> GetValidActionGridPositionList()
@@ -43,8 +34,7 @@ public class SpinAction : BaseAction
         };
     }
 
-    public override int GetActionPointsCost()
-    {
-        return 2;
-    }
+    public override string GetActionName() { return "Spin"; }
+
+    public override int GetActionPointsCost() { return 2; }
 }
