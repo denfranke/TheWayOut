@@ -6,6 +6,8 @@ using System;
 public class UnitAnimator : MonoBehaviour
 {
     [SerializeField] Animator animator;
+    [SerializeField] Transform bulletProjectilePref;
+    [SerializeField] Transform shootPoint;
 
     private void Awake()
     {
@@ -25,5 +27,16 @@ public class UnitAnimator : MonoBehaviour
 
     private void MoveAction_OnStopMoving(object sender, EventArgs e) { animator.SetBool("IsWalking", false); }
 
-    private void ShootAction_OnShoot(object sender, EventArgs e) { animator.SetTrigger("Shoot"); }
+    private void ShootAction_OnShoot(object sender, ShootAction.OnShootEventArgs e)
+    {
+        animator.SetTrigger("Shoot");
+
+        Transform bulletProjectileInstance = Instantiate(bulletProjectilePref, shootPoint.position, Quaternion.identity);
+        BulletProjectile bulletProjectile = bulletProjectileInstance.GetComponent<BulletProjectile>();
+
+        Vector3 targetUnitShootAtPosition = e.targetUnit.GetWorldPosition();
+        targetUnitShootAtPosition.y = shootPoint.transform.position.y;
+
+        bulletProjectile.Setup(targetUnitShootAtPosition);
+    }
 }
