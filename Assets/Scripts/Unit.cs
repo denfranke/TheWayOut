@@ -11,7 +11,8 @@ public class Unit : MonoBehaviour
 
     public static event EventHandler OnAnyActionPointsChanged;
 
-    private GridPosition currentGridPosition;
+    private HealthSystem healthSystem;
+    private GridPosition gridPosition;
     private MoveAction moveAction;
     private SpinAction spinAction;
     private BaseAction[] baseActions;
@@ -19,6 +20,7 @@ public class Unit : MonoBehaviour
 
     private void Awake()
     {
+        healthSystem = GetComponent<HealthSystem>();
         moveAction = GetComponent<MoveAction>();
         spinAction = GetComponent<SpinAction>();
         baseActions = GetComponents<BaseAction>();
@@ -26,18 +28,19 @@ public class Unit : MonoBehaviour
 
     private void Start()
     {
-        currentGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
-        LevelGrid.Instance.AddUnitAtGridPosition(currentGridPosition, this);
+        healthSystem.OnDead += HealthSystem_OnDead;
+        gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+        LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
     }
 
     void Update()
     {
         GridPosition newGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
-        if (newGridPosition != currentGridPosition)
+        if (newGridPosition != gridPosition)
         {
-            LevelGrid.Instance.UnitMovedGridPosition(this, currentGridPosition, newGridPosition);
-            currentGridPosition = newGridPosition;
+            LevelGrid.Instance.UnitMovedGridPosition(this, gridPosition, newGridPosition);
+            gridPosition = newGridPosition;
         }
     }
 
@@ -73,16 +76,22 @@ public class Unit : MonoBehaviour
             return false;
     }
 
-    public void Damage()
+    public void Damage(int damageAmount)
     {
-        Debug.Log("Damaged");
+        healthSystem.TakeDamage(damageAmount);
+    }
+
+    private void HealthSystem_OnDead(object sender, EventArgs e)
+    {
+        LevelGrid.Instance.RemoveUnitAtGridPosition(gridPosition, this);
+        Destroy(gameObject);
     }
 
     public Vector3 GetWorldPosition() { return transform.position; }
 
     public MoveAction MoveAction { get { return moveAction; } }
     public SpinAction SpinAction { get { return spinAction; } }
-    public GridPosition GridPosition { get { return currentGridPosition; } }
+    public GridPosition GridPosition { get { return gridPosition; } }
     public BaseAction[] BaseActions { get { return baseActions; } }
     public int ActionPoints { get { return actionPoints; } }
 
