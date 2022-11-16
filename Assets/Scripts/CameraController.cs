@@ -19,7 +19,6 @@ public class CameraController : MonoBehaviour
         targetFollowOffset = cinemachineTransposer.m_FollowOffset;
     }
 
-    // Update is called once per frame
     void Update()
     {
         HandleMovement();
