@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ShootAction : BaseAction
 {
+    [SerializeField] private int damageAmount;
+
     private enum State
     {
         Aiming,
@@ -67,7 +69,7 @@ public class ShootAction : BaseAction
             shootingUnit = unit
         });
 
-        targetUnit.Damage(40);
+        targetUnit.Damage(damageAmount);
     }
 
     private void NextState()
