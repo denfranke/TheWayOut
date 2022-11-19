@@ -8,6 +8,8 @@ public class UnitActionSystem : MonoBehaviour
 {
     [SerializeField] private LayerMask unitLayerMask;
 
+    public static UnitActionSystem Instance { get; private set; }
+
     private Unit selectedUnit;
     private BaseAction selectedAction;
     private bool isBusy;
@@ -17,8 +19,6 @@ public class UnitActionSystem : MonoBehaviour
     public event EventHandler OnSelectActionChanged;
     public event EventHandler<bool> OnBusyActionChanged;
     public event EventHandler OnActionStarted;
-
-    public static UnitActionSystem Instance { get; private set; }
 
     private void Awake()
     {

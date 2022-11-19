@@ -5,12 +5,12 @@ using System;
 
 public class TurnSystem : MonoBehaviour
 {
-    private int turnNumber = 1;
-    private bool isPlayerTurn = true;
-
     public static TurnSystem Instance { get; private set; }
 
     public event EventHandler OnTurnChanged;
+
+    private int turnNumber = 1;
+    private bool isPlayerTurn = true;
 
     private void Awake()
     {
