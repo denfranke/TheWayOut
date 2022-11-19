@@ -28,7 +28,6 @@ public class ShootAction : BaseAction
     private Unit targetUnit;
     private bool canShootBullet;
 
-
     void Update()
     {
         if (!isActive) return;
@@ -141,4 +140,5 @@ public class ShootAction : BaseAction
     public override int GetActionPointsCost() { return 1; }
 
     public Unit TargetUnit { get { return targetUnit; } }
+    public int MaxShootDistance { get { return maxShootDistance; } }
 }

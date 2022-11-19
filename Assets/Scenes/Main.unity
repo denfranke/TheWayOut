@@ -2729,8 +2729,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 305e68f04a72772448ecd8677c7b758d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridVisualPref: {fileID: 64896150361223873, guid: 70f78f9b9b87d8e48b6936a37ef53134,
+  gridVisualPref: {fileID: 64896150361223873, guid: 70f78f9b9b87d8e48b6936a37ef53134,
     type: 3}
+  gridVisualTypeMaterials:
+  - gridVisualType: 0
+    material: {fileID: 2100000, guid: 3d0d0ec73b6396d43b9c1f34975a7b0e, type: 2}
+  - gridVisualType: 1
+    material: {fileID: 2100000, guid: 0ac220d83a4523c4b8c8f778282a8c7f, type: 2}
+  - gridVisualType: 2
+    material: {fileID: 2100000, guid: d4aacf866ba812a4ca88f03d422274d5, type: 2}
+  - gridVisualType: 3
+    material: {fileID: 2100000, guid: 5516ac449b83fce4595e6e3485fb6ea0, type: 2}
+  - gridVisualType: 4
+    material: {fileID: 2100000, guid: 632302245ff2fcd40898c56a57308645, type: 2}
 --- !u!1 &1780370804
 GameObject:
   m_ObjectHideFlags: 0
