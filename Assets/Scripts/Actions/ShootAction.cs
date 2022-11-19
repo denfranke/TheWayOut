@@ -44,7 +44,7 @@ public class ShootAction : BaseAction
                 break;
 
             case State.Shooting:
-                if(canShootBullet)
+                if (canShootBullet)
                 {
                     Shoot();
                     canShootBullet = false;
@@ -63,7 +63,7 @@ public class ShootAction : BaseAction
 
     private void Shoot()
     {
-        OnShoot?.Invoke(this, new OnShootEventArgs 
+        OnShoot?.Invoke(this, new OnShootEventArgs
         {
             targetUnit = targetUnit,
             shootingUnit = unit
@@ -126,8 +126,6 @@ public class ShootAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action OnActionComplete)
     {
-        ActionStart(OnActionComplete);
-
         targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
 
         state = State.Aiming;
@@ -135,8 +133,12 @@ public class ShootAction : BaseAction
         stateTimer = aimingStateTime;
 
         canShootBullet = true;
+
+        ActionStart(OnActionComplete);
     }
 
     public override string GetActionName() { return "Shoot"; }
     public override int GetActionPointsCost() { return 1; }
+
+    public Unit TargetUnit { get { return targetUnit; } }
 }

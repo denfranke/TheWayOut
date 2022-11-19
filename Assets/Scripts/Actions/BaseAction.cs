@@ -5,6 +5,9 @@ using System;
 
 public abstract class BaseAction : MonoBehaviour
 {
+    public static event EventHandler OnAnyActionStarted;
+    public static event EventHandler OnAnyActionCompleted;
+
     protected Unit unit;
     protected bool isActive;
     protected Action OnActionComplete;
@@ -15,6 +18,7 @@ public abstract class BaseAction : MonoBehaviour
     }
 
     public abstract string GetActionName();
+
     public abstract void TakeAction(GridPosition gridPosition, Action OnCompleteAction);
 
     public abstract List<GridPosition> GetValidActionGridPositionList();
@@ -34,11 +38,15 @@ public abstract class BaseAction : MonoBehaviour
     {
         isActive = true;
         this.OnActionComplete = OnActionComplete;
+        OnAnyActionStarted?.Invoke(this, EventArgs.Empty);
     }
 
     protected void ActionComplete()
     {
         isActive = false;
         OnActionComplete();
+        OnAnyActionCompleted?.Invoke(this, EventArgs.Empty);
     }
+
+    public Unit Unit { get { return unit; } }
 }
