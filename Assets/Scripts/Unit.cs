@@ -17,6 +17,7 @@ public class Unit : MonoBehaviour
     private GridPosition gridPosition;
     private MoveAction moveAction;
     private SpinAction spinAction;
+    private ShootAction shootAction;
     private BaseAction[] baseActions;
     private int actionPoints = ACTION_POINTS_MAX;
 
@@ -25,6 +26,7 @@ public class Unit : MonoBehaviour
         healthSystem = GetComponent<HealthSystem>();
         moveAction = GetComponent<MoveAction>();
         spinAction = GetComponent<SpinAction>();
+        shootAction = GetComponent<ShootAction>();
         baseActions = GetComponents<BaseAction>();
     }
 
@@ -60,7 +62,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private bool CanSpendActionPointsToTakeAction(BaseAction baseAction)
+    public bool CanSpendActionPointsToTakeAction(BaseAction baseAction)
     {
         if (actionPoints >= baseAction.GetActionPointsCost()) return true;
         else return false;
@@ -97,11 +99,16 @@ public class Unit : MonoBehaviour
 
     public Vector3 GetWorldPosition() { return transform.position; }
 
+    public float GetHealthNormalized()
+    {
+        return healthSystem.GetHealthNormalized();
+    }
+
     public MoveAction MoveAction { get { return moveAction; } }
     public SpinAction SpinAction { get { return spinAction; } }
+    public ShootAction ShootAction { get { return shootAction; } }
     public GridPosition GridPosition { get { return gridPosition; } }
     public BaseAction[] BaseActions { get { return baseActions; } }
     public int ActionPoints { get { return actionPoints; } }
-
     public bool IsEnemy { get { return isEnemy; } }
 }
