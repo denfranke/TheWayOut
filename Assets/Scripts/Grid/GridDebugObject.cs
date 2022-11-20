@@ -5,17 +5,17 @@ using TMPro;
 
 public class GridDebugObject : MonoBehaviour
 {
-    private GridObject gridObject;
-    private TextMeshProUGUI textMeshPro;
+    [SerializeField] TextMeshProUGUI gridPosition;
 
-    public void SetGridObject(GridObject gridObject)
+    private object gridObject;
+
+    public virtual void SetGridObject(object gridObject)
     {
         this.gridObject = gridObject;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        textMeshPro = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        textMeshPro.text = gridObject.ToString();
+        gridPosition.text = gridObject.ToString();
     }
 }

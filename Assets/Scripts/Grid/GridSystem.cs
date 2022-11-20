@@ -39,7 +39,7 @@ public class GridSystem<TGridObject>
             );
     }
 
-    public void VisualizeGridObjects(Transform textPrefab)
+    public void VisualizeGridDebugObjects(Transform textPrefab)
     {
         for (int x = 0; x < width; x++)
         {
@@ -48,7 +48,7 @@ public class GridSystem<TGridObject>
                 GridPosition gridPosition = new GridPosition(x, z);
                 Transform debugObject = GameObject.Instantiate(textPrefab, GetWorldPosition(gridPosition), Quaternion.identity);
                 GridDebugObject gridDebugObject = debugObject.GetComponent<GridDebugObject>();
-                gridDebugObject.SetGridObject(GetGridObject(gridPosition) as GridObject);
+                gridDebugObject.SetGridObject(GetGridObject(gridPosition));
             }
         }
     }

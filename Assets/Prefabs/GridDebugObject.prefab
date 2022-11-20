@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5134925135378628954}
   - component: {fileID: 1651110723487348882}
   m_Layer: 5
-  m_Name: BlockPositionText
+  m_Name: GridDebugObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &5134925135378628954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f03f83ece605a47a0541f1f6b1b38f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridPosition: {fileID: 1030470083650055666}
 --- !u!1 &5134925135707841868
 GameObject:
   m_ObjectHideFlags: 0
