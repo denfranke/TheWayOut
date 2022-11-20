@@ -11,7 +11,7 @@ public class LevelGrid : MonoBehaviour
 
     public static LevelGrid Instance { get; private set; }
 
-    private GridSystem gridSystem;
+    private GridSystem<GridObject> gridSystem;
 
     private void Awake()
     {
@@ -24,7 +24,10 @@ public class LevelGrid : MonoBehaviour
 
         Instance = this;
 
-        gridSystem = new GridSystem(10, 10, 2f);
+        gridSystem = new GridSystem<GridObject>(10, 10, 2f, 
+            (GridSystem<GridObject> gridSystem, GridPosition gridPosition)
+            => new GridObject(gridSystem, gridPosition));
+
         gridSystem.VisualizeGridObjects(gridDebugObjectPrefab);
     }
 
