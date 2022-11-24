@@ -20,7 +20,13 @@ public class PathNode
         return gridPosition.ToString();
     }
 
-    public int GCost{ get { return gCost; } }
-    public int HCost { get { return hCost; } }
+    public void CalculateFCost() { fCost = GCost + HCost; }
+
+    public PathNode ParentPathNode { get { return parentPathNode; } set { parentPathNode = value; } }
+
+    public int GCost{ get { return gCost;} set { gCost = value; } }
+    public int HCost { get { return hCost; } set { hCost = value; } }
     public int FCost { get { return fCost; } }
+
+    public GridPosition GridPosition { get { return gridPosition; } }
 }
