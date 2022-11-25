@@ -9,6 +9,7 @@ public class PathNode
     private int hCost;
     private int fCost;
     private PathNode parentPathNode;
+    private bool isWalkable = true;
 
     public PathNode(GridPosition gridPosition)
     {
@@ -27,6 +28,6 @@ public class PathNode
     public int GCost{ get { return gCost;} set { gCost = value; } }
     public int HCost { get { return hCost; } set { hCost = value; } }
     public int FCost { get { return fCost; } }
-
     public GridPosition GridPosition { get { return gridPosition; } }
+    public bool IsWalkable { get { return isWalkable; } set { isWalkable = value; } }
 }
