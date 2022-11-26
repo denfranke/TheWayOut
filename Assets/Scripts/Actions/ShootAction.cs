@@ -6,6 +6,7 @@ using UnityEngine;
 public class ShootAction : BaseAction
 {
     [SerializeField] private int damageAmount;
+    [SerializeField] private LayerMask obstaclesLayerMask;
 
     private enum State
     {
@@ -113,14 +114,27 @@ public class ShootAction : BaseAction
                 GridPosition testGridPosition = unitGridPosition + offsetGridPosition;
 
                 int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
-                if (testDistance > maxShootDistance) continue;
+                if (testDistance > maxShootDistance)
+                    continue;
 
-                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition)) continue;
+                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition)) 
+                    continue;
 
-                if (!LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition)) continue;
+                if (!LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
+                    continue;
 
                 Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(testGridPosition);
-                if (targetUnit.IsEnemy == unit.IsEnemy) continue;
+                if (targetUnit.IsEnemy == unit.IsEnemy)
+                    continue;
+
+                float unitShoulderHeight = 1.7f;
+                Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(unitGridPosition);
+                Vector3 shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
+                if (Physics.Raycast(unitWorldPosition + Vector3.up * unitShoulderHeight,
+                    shootDirection,
+                    Vector3.Distance(unitWorldPosition, targetUnit.GetWorldPosition()),
+                    obstaclesLayerMask))
+                    continue;
 
                 validGridPositionList.Add(testGridPosition);
             }

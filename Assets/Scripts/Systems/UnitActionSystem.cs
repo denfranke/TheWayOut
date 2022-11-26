@@ -77,13 +77,6 @@ public class UnitActionSystem : MonoBehaviour
         {
             GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MousePointer.GetPosition());
 
-            // Debug pathfinding
-            List<GridPosition> path = Pathfinding.Instance.FindPath(selectedUnit.GridPosition, mouseGridPosition);
-            for (int i = 0; i < path.Count; i++)
-            {
-                Debug.Log(path[i]);
-            }
-
             if (selectedAction.IsValidActionGridPosition(mouseGridPosition))
             {
                 if(selectedUnit.TrySpendActionPointsToTakeAction(selectedAction))

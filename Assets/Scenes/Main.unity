@@ -1785,7 +1785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb4a1d5902a3fc43896c42e74acc96e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridDebugObjectPref: {fileID: 5134925135378628965, guid: cb64849d964dfc94b8a62348a7f00768,
+  gridDebugObjectPref: {fileID: 5134925135378628965, guid: 31b08b1076e247f469ee735c99656c3b,
     type: 3}
   obstaclesLayerMask:
     serializedVersion: 2
