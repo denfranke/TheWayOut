@@ -102,6 +102,12 @@ public class Pathfinding : MonoBehaviour
                     continue;
                 }
 
+                if (LevelGrid.Instance.HasAnyUnitOnGridPosition(neighbourNode.GridPosition))
+                {
+                    closed.Add(neighbourNode);
+                    continue;
+                }
+
                 int tentativeGCost = currentNode.GCost + CalculateDistance(currentNode.GridPosition, neighbourNode.GridPosition);
                 if(tentativeGCost < neighbourNode.GCost)
                 {
@@ -183,7 +189,7 @@ public class Pathfinding : MonoBehaviour
             neighbours.Add(GetNode(gridPosition.x - 1, gridPosition.z + 0));
 
             if(gridPosition.z - 1 >= 0)
-                neighbours.Add(GetNode(gridPosition.x + 1, gridPosition.z - 1));
+                neighbours.Add(GetNode(gridPosition.x - 1, gridPosition.z - 1));
 
             if (gridPosition.z + 1 < gridSystem.Height)
                 neighbours.Add(GetNode(gridPosition.x - 1, gridPosition.z + 1));
@@ -212,6 +218,11 @@ public class Pathfinding : MonoBehaviour
     public bool IsWalkableGridPosition(GridPosition gridPosition) 
     {
         return gridSystem.GetGridObject(gridPosition).IsWalkable;
+    }
+
+    public void  SetIsWalkableGridPosition(GridPosition gridPosition, bool isWalkable)
+    {
+        gridSystem.GetGridObject(gridPosition).IsWalkable = isWalkable;
     }
 
     public bool HasPath(GridPosition from, GridPosition to)

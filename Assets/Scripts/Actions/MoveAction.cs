@@ -57,7 +57,7 @@ public class MoveAction : BaseAction
         ActionStart(OnActionComplete);
     }
 
-    public override List<GridPosition> GetValidActionGridPositionList()
+    public override List<GridPosition> GetValidActionGridPositions()
     {
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 

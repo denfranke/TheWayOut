@@ -103,7 +103,7 @@ public class GridSystemVisual : MonoBehaviour
                 break;
         }
 
-        ShowGridVisuals(selectedAction.GetValidActionGridPositionList(), gridVisualType);
+        ShowGridVisuals(selectedAction.GetValidActionGridPositions(), gridVisualType);
     }
 
     private void HideAllGridVisuals()

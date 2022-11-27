@@ -101,13 +101,13 @@ public class ShootAction : BaseAction
         }
     }
 
-    public override List<GridPosition> GetValidActionGridPositionList()
+    public override List<GridPosition> GetValidActionGridPositions()
     {
         GridPosition unitGridPosition = unit.GridPosition;
-        return GetValidActionGridPositionList(unitGridPosition);
+        return GetValidActionGridPositions(unitGridPosition);
     }
 
-    public List<GridPosition> GetValidActionGridPositionList(GridPosition gridPosition)
+    public List<GridPosition> GetValidActionGridPositions(GridPosition gridPosition)
     {
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
@@ -179,7 +179,7 @@ public class ShootAction : BaseAction
 
     public int GetTargetCountAtPosition(GridPosition gridPosition)
     {
-        return GetValidActionGridPositionList(gridPosition).Count;
+        return GetValidActionGridPositions(gridPosition).Count;
     }
 
     public Unit TargetUnit { get { return targetUnit; } }

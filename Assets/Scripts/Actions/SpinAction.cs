@@ -24,7 +24,7 @@ public class SpinAction : BaseAction
         ActionStart(OnActionComplete);
     }
 
-    public override List<GridPosition> GetValidActionGridPositionList()
+    public override List<GridPosition> GetValidActionGridPositions()
     {
         GridPosition unitGridPosition = unit.GridPosition;
 

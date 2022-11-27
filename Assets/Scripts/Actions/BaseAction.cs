@@ -21,11 +21,11 @@ public abstract class BaseAction : MonoBehaviour
 
     public abstract void TakeAction(GridPosition gridPosition, Action OnCompleteAction);
 
-    public abstract List<GridPosition> GetValidActionGridPositionList();
+    public abstract List<GridPosition> GetValidActionGridPositions();
 
     public virtual bool IsValidActionGridPosition(GridPosition gridPosition)
     {
-        List<GridPosition> validGridPositionList = GetValidActionGridPositionList();
+        List<GridPosition> validGridPositionList = GetValidActionGridPositions();
         return validGridPositionList.Contains(gridPosition);
     }
 
@@ -51,7 +51,7 @@ public abstract class BaseAction : MonoBehaviour
     public EnemyAIAction GetBestEnemyAIAction()
     {
         List<EnemyAIAction> enemyAIActions = new List<EnemyAIAction>();
-        List<GridPosition> validActionGridPositionList = GetValidActionGridPositionList();
+        List<GridPosition> validActionGridPositionList = GetValidActionGridPositions();
 
         foreach(GridPosition gridPosition in validActionGridPositionList)
         {
