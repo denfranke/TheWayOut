@@ -15,6 +15,7 @@ public class ShootAction : BaseAction
         CoolOff,
     }
 
+    public static event EventHandler<OnShootEventArgs> OnAnyShoot;
     public event EventHandler<OnShootEventArgs> OnShoot;
 
     public class OnShootEventArgs : EventArgs
@@ -64,6 +65,12 @@ public class ShootAction : BaseAction
     private void Shoot()
     {
         OnShoot?.Invoke(this, new OnShootEventArgs
+        {
+            targetUnit = targetUnit,
+            shootingUnit = unit
+        });
+
+        OnAnyShoot?.Invoke(this, new OnShootEventArgs
         {
             targetUnit = targetUnit,
             shootingUnit = unit
