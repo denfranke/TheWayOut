@@ -3653,12 +3653,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5591132215820847394, guid: 653b900782eabcb478a0c69c61f3e27f,
-        type: 3}
-      propertyPath: crateDestroyedPref
-      value: 
-      objectReference: {fileID: 5645674599837334592, guid: e3c16c15c8256454c8905bc725fa42b6,
-        type: 3}
     - target: {fileID: 5645674599837334592, guid: 653b900782eabcb478a0c69c61f3e27f,
         type: 3}
       propertyPath: m_RootOrder

@@ -3,21 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrenadeAction : BaseAction
+public class InteractAction : BaseAction
 {
-    [SerializeField] private Transform GrenadeProjectilePref;
-
-    private int maxThrowDistance = 7;
-
-    private void Update()
-    {
-        if (!isActive)
-            return;
-    }
+    private int maxInteractDistance = 1;
 
     public override string GetActionName()
     {
-        return "Grenade";
+        return "Interact";
     }
 
     public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
@@ -25,7 +17,7 @@ public class GrenadeAction : BaseAction
         return new EnemyAIAction
         {
             gridPosition = gridPosition,
-            actionValue = 2,
+            actionValue = 0,
         };
     }
 
@@ -35,18 +27,18 @@ public class GrenadeAction : BaseAction
 
         GridPosition unitGridPosition = unit.GridPosition;
 
-        for (int x = -maxThrowDistance; x <= maxThrowDistance; x++)
+        for (int x = -maxInteractDistance; x <= maxInteractDistance; x++)
         {
-            for (int z = -maxThrowDistance; z <= maxThrowDistance; z++)
+            for (int z = -maxInteractDistance; z <= maxInteractDistance; z++)
             {
                 GridPosition offsetGridPosition = new GridPosition(x, z);
                 GridPosition testGridPosition = unitGridPosition + offsetGridPosition;
 
-                int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
-                if (testDistance > maxThrowDistance)
+                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
                     continue;
 
-                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                IInteractable interactable = LevelGrid.Instance.GetInteractableAtGridPosition(testGridPosition);
+                if (interactable == null)
                     continue;
 
                 validGridPositionList.Add(testGridPosition);
@@ -58,10 +50,8 @@ public class GrenadeAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action OnCompleteAction)
     {
-        Transform grenadeProjectileInstance = Instantiate(GrenadeProjectilePref, unit.GetWorldPosition(), Quaternion.identity);
-        GrenadeProjectile grenadeProjectile = grenadeProjectileInstance.GetComponent<GrenadeProjectile>();
-        grenadeProjectile.Setup(gridPosition, ActionComplete);
-
+        IInteractable interactable = LevelGrid.Instance.GetInteractableAtGridPosition(gridPosition);
         ActionStart(OnCompleteAction);
+        interactable.Interact(ActionComplete);
     }
 }

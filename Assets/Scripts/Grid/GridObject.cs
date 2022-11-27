@@ -8,6 +8,8 @@ public class GridObject
     private GridPosition gridPosition;
     private List<Unit> units;
 
+    private IInteractable interactable;
+
     public GridObject(GridSystem<GridObject> gridSystem, GridPosition gridPosition)
     {
         this.gridSystem = gridSystem;
@@ -51,4 +53,6 @@ public class GridObject
         if (HasAnyUnit()) return units[0];
         else return null;
     }
+
+    public IInteractable Interactable { get { return interactable; } set { interactable = value; } }
 }

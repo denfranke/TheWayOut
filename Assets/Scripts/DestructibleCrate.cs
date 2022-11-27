@@ -21,6 +21,7 @@ public class DestructibleCrate : MonoBehaviour
         OnAnyDestroyed?.Invoke(this, EventArgs.Empty);
         Transform crateDestroyedInstance = Instantiate(crateDestroyedPref, transform.position, transform.rotation);
         ApplyExplosionToChildren(crateDestroyedInstance, 50f, transform.position, 10f);
+        LevelGrid.Instance.RemoveInteractableAtGridPosition(gridPosition, GetComponent<Crate>());
 
         Destroy(gameObject);
     }
