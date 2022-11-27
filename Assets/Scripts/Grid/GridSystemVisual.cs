@@ -101,6 +101,15 @@ public class GridSystemVisual : MonoBehaviour
                 gridVisualType = GridVisualType.Red;
                 ShowGridVisualsRange(selectedUnit.GridPosition, shootAction.MaxShootDistance, GridVisualType.RedSoft);
                 break;
+
+            case GrenadeAction grenadeAction:
+                gridVisualType = GridVisualType.Yellow;
+                break;
+
+            case SwordAction swordAction:
+                gridVisualType = GridVisualType.Red;
+                ShowGridVisualsRangeSquare(selectedUnit.GridPosition, swordAction.MaxSwordDistance, GridVisualType.RedSoft);
+                break;
         }
 
         ShowGridVisuals(selectedAction.GetValidActionGridPositions(), gridVisualType);
@@ -138,6 +147,25 @@ public class GridSystemVisual : MonoBehaviour
 
                 int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
                 if (testDistance > range) continue;
+
+                gridPositions.Add(testGridPosition);
+            }
+        }
+
+        ShowGridVisuals(gridPositions, gridVisualType);
+    }
+
+    private void ShowGridVisualsRangeSquare(GridPosition gridPosition, int range, GridVisualType gridVisualType)
+    {
+        List<GridPosition> gridPositions = new List<GridPosition>();
+
+        for (int x = -range; x <= range; x++)
+        {
+            for (int z = -range; z <= range; z++)
+            {
+                GridPosition testGridPosition = gridPosition + new GridPosition(x, z);
+
+                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition)) continue;
 
                 gridPositions.Add(testGridPosition);
             }

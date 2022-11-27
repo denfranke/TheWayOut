@@ -23,7 +23,7 @@ public class HealthSystem : MonoBehaviour
 
         OnDamaged?.Invoke(this, EventArgs.Empty);
 
-        if (health < 0)
+        if (health <= 0)
         {
             health = 0;
             Die();
