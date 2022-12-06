@@ -10,6 +10,14 @@ public class UnitAnimator : MonoBehaviour
     [SerializeField] Transform sword;
     [SerializeField] Transform rifle;
     [SerializeField] Transform shootPoint;
+    [SerializeField] Transform handLeft;
+    [SerializeField] Transform handRight;
+
+    private Vector3 rightHandRiflePosition = new Vector3(8, 8, -2.6f);
+    private Vector3 rightHandRifleRotation = new Vector3(4.15f, 52.3f, -128.2f);
+
+    private Vector3 leftHandRiflePosition = new Vector3(12f, -3f, 13f);
+    private Vector3 leftHandRifleRotation = new Vector3(-6f, 226f, -382f);
 
     private void Awake()
     {
@@ -29,6 +37,12 @@ public class UnitAnimator : MonoBehaviour
             swordAction.OnSwordActionStarted += SwordAction_OnSwordActionStarted;
             swordAction.OnSwordActionCompleted += SwordAction_OnSwordActionCompleted;
         }
+
+        if (TryGetComponent<GrenadeAction>(out GrenadeAction grenadeAction))
+        {
+            grenadeAction.OnGrenadeActionStarted += GrenadeAction_OnGrenadeActionStarted;
+            grenadeAction.OnGrenadeActionCompleted += GrenadeAction_OnGrenadeActionCompleted;
+        }
     }
 
     private void Start()
@@ -45,6 +59,24 @@ public class UnitAnimator : MonoBehaviour
     private void SwordAction_OnSwordActionCompleted(object sender, EventArgs e)
     {
         EquipRifle();
+    }
+
+    private void GrenadeAction_OnGrenadeActionStarted(object sender, EventArgs e)
+    {
+        rifle.transform.parent = handLeft;
+        rifle.transform.localPosition = leftHandRiflePosition;
+        rifle.transform.localRotation = Quaternion.Euler(leftHandRifleRotation);
+
+        animator.SetTrigger("GrenadeThrow");
+    }
+
+    private void GrenadeAction_OnGrenadeActionCompleted(object sender, EventArgs e)
+    {
+        rifle.transform.parent = handRight;
+        rifle.transform.localPosition = rightHandRiflePosition;
+        rifle.transform.localRotation = Quaternion.Euler(rightHandRifleRotation);
+
+        animator.SetTrigger("GrenadeThrow");
     }
 
     private void MoveAction_OnStartMoving(object sender, EventArgs e) { animator.SetBool("IsWalking", true); }

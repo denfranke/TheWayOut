@@ -32,7 +32,8 @@ public class ShootAction : BaseAction
 
     void Update()
     {
-        if (!isActive) return;
+        if (!isActive) 
+            return;
 
         stateTimer -= Time.deltaTime;
 

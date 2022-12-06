@@ -26,7 +26,7 @@ public class GrenadeProjectile : MonoBehaviour
         float currentDistance = Vector3.Distance(positionXZ, targetPosition);
         float currentDistanceNormalized = 1 - currentDistance / totalDistance;
 
-        float maxHeight = totalDistance / 5f;
+        float maxHeight = totalDistance / 2f;
         float positionY = arcYAnimationCurve.Evaluate(currentDistanceNormalized) * maxHeight;
         transform.position = new Vector3(positionXZ.x, positionY, positionXZ.z);
 

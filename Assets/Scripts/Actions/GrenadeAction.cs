@@ -7,13 +7,91 @@ public class GrenadeAction : BaseAction
 {
     [SerializeField] private Transform GrenadeProjectilePref;
 
+    private enum State
+    {
+        Aiming,
+        ThrowingStart,
+        ThrowingEnd,
+    }
+
+    public event EventHandler OnGrenadeActionStarted;
+    public event EventHandler OnGrenadeActionCompleted;
+
+    private State state;
+    private float stateTimer;
+
     private int maxThrowDistance = 7;
+    private GridPosition targetPosition;
+    private bool canThrowGrenade;
 
     private void Update()
     {
         if (!isActive)
             return;
+
+        stateTimer -= Time.deltaTime;
+
+        switch (state)
+        {
+            case State.Aiming:
+                Vector3 aimDirection = (LevelGrid.Instance.GetWorldPosition(targetPosition) - unit.GetWorldPosition()).normalized;
+                float rotateSpeed = 10f;
+                transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * rotateSpeed);
+                break;
+
+            case State.ThrowingStart:
+                break;
+
+            case State.ThrowingEnd:
+                if (canThrowGrenade)
+                {
+                    Throw();
+                    canThrowGrenade = false;
+                    OnGrenadeActionCompleted?.Invoke(this, EventArgs.Empty);
+                    ActionComplete();
+                }
+                break;
+        }
+
+        if (stateTimer <= 0)
+        {
+            NextState();
+        }
     }
+
+    private void Throw()
+    {
+        Transform grenadeProjectileInstance = Instantiate(GrenadeProjectilePref, unit.GetWorldPosition(), Quaternion.identity);
+        GrenadeProjectile grenadeProjectile = grenadeProjectileInstance.GetComponent<GrenadeProjectile>();
+        grenadeProjectile.Setup(targetPosition, ActionComplete);
+    }
+
+    private void NextState()
+    {
+        switch (state)
+        {
+            case State.Aiming:
+                state = State.ThrowingStart;
+                float aimingStateTime = 0.1f;
+                stateTimer = aimingStateTime;
+                break;
+
+            case State.ThrowingStart:
+                state = State.ThrowingEnd;
+                float throwingStartStateTime = 2f;
+                stateTimer = throwingStartStateTime;
+
+                OnGrenadeActionStarted?.Invoke(this, EventArgs.Empty);
+
+                break;
+
+            case State.ThrowingEnd:
+                stateTimer = 10f;
+                canThrowGrenade = true;
+                break;
+        }
+    }
+
 
     public override string GetActionName()
     {
@@ -56,12 +134,14 @@ public class GrenadeAction : BaseAction
         return validGridPositionList;
     }
 
-    public override void TakeAction(GridPosition gridPosition, Action OnCompleteAction)
+    public override void TakeAction(GridPosition gridPosition, Action OnActionComplete)
     {
-        Transform grenadeProjectileInstance = Instantiate(GrenadeProjectilePref, unit.GetWorldPosition(), Quaternion.identity);
-        GrenadeProjectile grenadeProjectile = grenadeProjectileInstance.GetComponent<GrenadeProjectile>();
-        grenadeProjectile.Setup(gridPosition, ActionComplete);
+        targetPosition = gridPosition;
 
-        ActionStart(OnCompleteAction);
+        state = State.Aiming;
+        float aimingStateTime = 1f;
+        stateTimer = aimingStateTime;
+
+        ActionStart(OnActionComplete);
     }
 }
