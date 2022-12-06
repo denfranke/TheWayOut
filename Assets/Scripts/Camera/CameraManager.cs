@@ -47,7 +47,9 @@ public class CameraManager : MonoBehaviour
                 actionCamera.transform.position = actionCameraPosition;
                 actionCamera.transform.LookAt(targetUnit.GetWorldPosition() + cameraUnitHeight);
 
-                ShowActionCamera();
+                if(shootAction.TargetUnit.IsEnemy)
+                    ShowActionCamera();
+
                 break;
         }
     }
