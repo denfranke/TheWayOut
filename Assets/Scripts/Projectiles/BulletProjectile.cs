@@ -34,6 +34,9 @@ public class BulletProjectile : MonoBehaviour
         {
             transform.position = targetPosition;
             trailRenderer.transform.parent = null;
+
+            FindObjectOfType<AudioManager>().Play("Shot");
+
             Destroy(gameObject);
             Instantiate(bulletHitVfxPref, targetPosition, Quaternion.identity);
         }

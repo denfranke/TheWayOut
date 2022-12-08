@@ -54,6 +54,8 @@ public class GrenadeProjectile : MonoBehaviour
             onGrenadeActionComplete();
             trailRenderer.transform.parent = null;
 
+            FindObjectOfType<AudioManager>().Play("GrenadeExplosion");
+
             Destroy(gameObject);
         }
     }
