@@ -5,5 +5,5 @@ using System;
 
 public interface IInteractable
 {
-    void Interact(Action OnInteractionComplete);
+    void Interact(Unit interactUnit, Action OnInteractionComplete);
 }

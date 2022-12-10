@@ -7,21 +7,26 @@ public class Unit : MonoBehaviour
 {
     [SerializeField] private bool isEnemy;
 
-    private const int ACTION_POINTS_MAX = 5;
+    private const int ACTION_POINTS_MAX = 50;
 
     public static event EventHandler OnAnyActionPointsChanged;
     public static event EventHandler OnAnyUnitSpawned;
     public static event EventHandler OnAnyUnitDead;
 
     private HealthSystem healthSystem;
+
     private GridPosition gridPosition;
+
     private BaseAction[] baseActions;
+    private List<Loot> lootItems;
+
     private int actionPoints = ACTION_POINTS_MAX;
 
     private void Awake()
     {
         healthSystem = GetComponent<HealthSystem>();
         baseActions = GetComponents<BaseAction>();
+        lootItems = new List<Loot>();
     }
 
     private void Start()
@@ -106,6 +111,24 @@ public class Unit : MonoBehaviour
         }
 
         return null;
+    }
+
+    public T GetLoot<T>() where T : Loot
+    {
+        foreach (Loot loot in lootItems)
+        {
+            if (loot is T)
+            {
+                return (T)loot;
+            }
+        }
+
+        return null;
+    }
+
+    public void AddLoot(Loot loot) 
+    {
+        lootItems.Add(loot);
     }
 
     public GridPosition GridPosition { get { return gridPosition; } }

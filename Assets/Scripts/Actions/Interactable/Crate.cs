@@ -5,7 +5,7 @@ using System;
 
 public class Crate : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Transform crateDestroyedPref;
+    [SerializeField] private Transform lootPref;
 
     private GridPosition gridPosition;
 
@@ -15,9 +15,13 @@ public class Crate : MonoBehaviour, IInteractable
         LevelGrid.Instance.SetInteractableAtGridPosition(gridPosition, this);
     }
 
-    public void Interact(Action OnInteractionComplete)
+    public void Interact(Unit interactUnit, Action OnInteractionComplete)
     {
         OnInteractionComplete();
         GetComponent<DestructibleCrate>().Damage();
+
+        Transform lootInstance = Instantiate(lootPref, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+        lootInstance.TryGetComponent<Key>(out Key key);
+        key.SetLootAtGridPosition(this.gameObject);
     }
 }
