@@ -41,6 +41,12 @@ public class InteractAction : BaseAction
                 if (interactable == null)
                     continue;
 
+                if(interactable is DoorLock)
+                {
+                    if (!unit.GetLoot<Key>())
+                        continue;
+                }
+
                 validGridPositionList.Add(testGridPosition);
             }
         }

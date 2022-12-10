@@ -9,11 +9,11 @@ public class DoorLock : MonoBehaviour, IInteractable
 
     private MeshRenderer meshRenderer;
     private GridPosition gridPosition;
-    public static event EventHandler OpenDoor;
+    public Action OpenDoor;
 
     private void Awake()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
 
     private void Start()
@@ -25,11 +25,8 @@ public class DoorLock : MonoBehaviour, IInteractable
     public void Interact(Unit interactUnit, Action OnInteractionComplete)
     {
         OnInteractionComplete();
-
-        if (interactUnit.GetLoot<Key>())
-        {
-            meshRenderer.material = greenMaterial;
-            OpenDoor?.Invoke(this, EventArgs.Empty);
-        }
+        meshRenderer.material = greenMaterial;
+        OpenDoor?.Invoke();
+        LevelGrid.Instance.RemoveInteractableAtGridPosition(gridPosition, this);
     }
 }

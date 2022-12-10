@@ -14,14 +14,16 @@ public class Door : MonoBehaviour
 
     private void Start()
     {
-        DoorLock.OpenDoor += DoorLock_OpenDoor;
+        FindObjectOfType<DoorLock>().OpenDoor += DoorLock_OpenDoor;
     }
 
-    private void DoorLock_OpenDoor(object sender, EventArgs e)
+    private void DoorLock_OpenDoor()
     {
         animator.SetBool("OpenDoor", true);
+    }
 
-        Pathfinding.Instance.SetIsWalkableGridPosition(new GridPosition(5, 7), true);
-        Pathfinding.Instance.SetIsWalkableGridPosition(new GridPosition(4, 7), true);
+    public void SetWalkablePass()
+    {
+        Pathfinding.Instance.UpdateWalkablePass();
     }
 }

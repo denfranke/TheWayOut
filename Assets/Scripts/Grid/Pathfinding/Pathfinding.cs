@@ -10,6 +10,10 @@ public class Pathfinding : MonoBehaviour
     private const int MOVE_STRAIGHT_COST = 10;
     private const int MOVE_DIAGONAL_COST = 14;
 
+    private int width;
+    private int height;
+    private float cellSize;
+
     public static Pathfinding Instance { get; private set; }
 
     private GridSystem<PathNode> gridSystem;
@@ -28,24 +32,37 @@ public class Pathfinding : MonoBehaviour
 
     public void Setup(int width, int height, float cellSize)
     {
+        this.width = width;
+        this.height = height;
+        this.cellSize = cellSize;
+
         gridSystem = new GridSystem<PathNode>(width, height, cellSize,
            (GridSystem<PathNode> GridSystem, GridPosition gridPosition)
            => new PathNode(gridPosition));
 
         gridSystem.VisualizeGridDebugObjects(gridDebugObjectPref);
 
-        for(int x = 0; x < width; x++)
+        UpdateWalkablePass();
+    }
+
+    public void UpdateWalkablePass()
+    {
+        for (int x = 0; x < width; x++)
         {
-            for(int z = 0; z < height; z++)
+            for (int z = 0; z < height; z++)
             {
                 GridPosition gridPosition = new GridPosition(x, z);
                 Vector3 worldPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
                 float raycastOffset = 5f;
-                if(Physics.Raycast(worldPosition + Vector3.down * raycastOffset, Vector3.up,
+                if (Physics.Raycast(worldPosition + Vector3.down * raycastOffset, Vector3.up,
                     raycastOffset * 2f,
                     obstaclesLayerMask))
                 {
                     GetNode(x, z).IsWalkable = false;
+                }
+                else
+                {
+                    GetNode(x, z).IsWalkable = true;
                 }
             }
         }

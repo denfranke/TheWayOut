@@ -18,6 +18,7 @@ public class Crate : MonoBehaviour, IInteractable
     public void Interact(Unit interactUnit, Action OnInteractionComplete)
     {
         OnInteractionComplete();
+
         GetComponent<DestructibleCrate>().Damage();
 
         Transform lootInstance = Instantiate(lootPref, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
