@@ -5,7 +5,12 @@ using System;
 
 public class UnitManager : MonoBehaviour
 {
+    [SerializeField] private int hiddenUnits = 2;
+
     public static UnitManager Instance { get; private set; }
+
+    public event EventHandler OnAllEnemiesDead;
+    public event EventHandler OnAllAlliesDead;
 
     private List<Unit> units;
     private List<Unit> friendlyUnits;
@@ -49,11 +54,23 @@ public class UnitManager : MonoBehaviour
 
         units.Remove(unit);
 
-        if (unit.IsEnemy) enemyUnits.Remove(unit);
-        else friendlyUnits.Remove(unit);
+        if (unit.IsEnemy)
+        {
+            enemyUnits.Remove(unit);
+            if (enemyUnits.Count == 0 - hiddenUnits)
+                OnAllEnemiesDead?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            friendlyUnits.Remove(unit);
+            if (friendlyUnits.Count == 0)
+                OnAllAlliesDead?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public List<Unit> Units { get { return units; } }
     public List<Unit> FriendlyUnits { get { return friendlyUnits; } }
     public List<Unit> EnemyUnits { get { return enemyUnits; } }
+
+    public int HiddenUnits { get { return hiddenUnits; } set { hiddenUnits = value; } }
 }

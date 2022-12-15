@@ -6,8 +6,9 @@ using System;
 public class Unit : MonoBehaviour
 {
     [SerializeField] private bool isEnemy;
+    [SerializeField] private int actionPoints;
 
-    private const int ACTION_POINTS_MAX = 50;
+    private int actionPointsMax;
 
     public static event EventHandler OnAnyActionPointsChanged;
     public static event EventHandler OnAnyUnitSpawned;
@@ -20,8 +21,6 @@ public class Unit : MonoBehaviour
     private BaseAction[] baseActions;
     private List<Loot> lootItems;
 
-    private int actionPoints = ACTION_POINTS_MAX;
-
     private void Awake()
     {
         healthSystem = GetComponent<HealthSystem>();
@@ -31,6 +30,8 @@ public class Unit : MonoBehaviour
 
     private void Start()
     {
+        actionPointsMax = actionPoints;
+
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
 
@@ -56,7 +57,7 @@ public class Unit : MonoBehaviour
     {
         if((isEnemy && !TurnSystem.Instance.IsPlayerTurn) || (!isEnemy && TurnSystem.Instance.IsPlayerTurn))
         {
-            actionPoints = ACTION_POINTS_MAX;
+            actionPoints = actionPointsMax;
             OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
         }
     }

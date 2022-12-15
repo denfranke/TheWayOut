@@ -54,6 +54,7 @@ public class SwordAction : BaseAction
                 float afterHitStateTime = 0.5f;
                 stateTimer = afterHitStateTime;
                 targetUnit.Damage(100);
+                FindObjectOfType<AudioManager>().Play("SwordHit");
                 OnAnySwordHit?.Invoke(this, EventArgs.Empty);
                 break;
 

@@ -541,8 +541,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6790350070931863419}
-  - component: {fileID: 6790350070931863418}
   - component: {fileID: 9119692317802754998}
+  - component: {fileID: 6790350070931863418}
   - component: {fileID: 3511387696409135468}
   - component: {fileID: 7368461450484176984}
   - component: {fileID: 7311397015814851208}
@@ -577,19 +577,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6790350070931863418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6790350070931863416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c5a52e0dde57b84e84113e10663bfc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnemy: 0
 --- !u!65 &9119692317802754998
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -603,6 +590,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.49247456, y: 1.8475236, z: 0.58597684}
   m_Center: {x: -0.0029420853, y: 0.8767956, z: -0.025364995}
+--- !u!114 &6790350070931863418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6790350070931863416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c5a52e0dde57b84e84113e10663bfc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnemy: 0
+  actionPoints: 2
 --- !u!114 &3511387696409135468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,7 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10f5c2e3daf0e7499f556d9fcdab9f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 0
+  damageAmount: 100
   obstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -691,7 +692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc5f29854b93d141bff9dac1d6b606d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 100
 --- !u!114 &5539878736131923497
 MonoBehaviour:
   m_ObjectHideFlags: 0

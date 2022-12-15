@@ -74,6 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f68090bc78aa6e4dbe5f2de1a8b358d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lootPref: {fileID: 1509302563044109368, guid: e44c7891826a9a949b9ba604c22c38b8,
+    type: 3}
 --- !u!1001 &5645674599430933132
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -103,7 +103,7 @@ public class GrenadeAction : BaseAction
         return new EnemyAIAction
         {
             gridPosition = gridPosition,
-            actionValue = 2,
+            actionValue = 0,
         };
     }
 
