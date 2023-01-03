@@ -13,7 +13,7 @@ public class UnitActionSystem : MonoBehaviour
     private Unit selectedUnit;
     private BaseAction selectedAction;
     private bool isBusy;
-    private string defaultSelectedUnitName = "Unit";
+    private string defaultSelectedUnitName = "UnitRifle";
 
     public event EventHandler OnSelectUnitChanged;
     public event EventHandler OnSelectActionChanged;

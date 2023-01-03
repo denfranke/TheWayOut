@@ -45,20 +45,15 @@ public class UnitAnimator : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        EquipRifle();
-    }
-
     private void SwordAction_OnSwordActionStarted(object sender, EventArgs e)
     {
         animator.SetTrigger("SwordSlash");
-        EquipSword();
+        
     }
 
     private void SwordAction_OnSwordActionCompleted(object sender, EventArgs e)
     {
-        EquipRifle();
+        
     }
 
     private void GrenadeAction_OnGrenadeActionStarted(object sender, EventArgs e)
