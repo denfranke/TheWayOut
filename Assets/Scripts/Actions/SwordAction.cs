@@ -79,6 +79,11 @@ public class SwordAction : BaseAction
         };
     }
 
+    public int GetTargetCountAtPosition(GridPosition gridPosition)
+    {
+        return GetValidActionGridPositions().Count;
+    }
+
     public override List<GridPosition> GetValidActionGridPositions()
     {
         List<GridPosition> validGridPositionList = new List<GridPosition>();

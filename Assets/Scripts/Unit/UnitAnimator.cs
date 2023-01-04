@@ -45,15 +45,23 @@ public class UnitAnimator : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (GetComponent<ShootAction>())
+            animator.SetBool("IsShooter", true);
+
+        if (GetComponent<SwordAction>())
+            animator.SetBool("IsWarrior", true);
+    }
+
     private void SwordAction_OnSwordActionStarted(object sender, EventArgs e)
     {
         animator.SetTrigger("SwordSlash");
-        
     }
 
     private void SwordAction_OnSwordActionCompleted(object sender, EventArgs e)
     {
-        
+        animator.SetTrigger("SwordSlash");
     }
 
     private void GrenadeAction_OnGrenadeActionStarted(object sender, EventArgs e)
@@ -74,9 +82,15 @@ public class UnitAnimator : MonoBehaviour
         animator.SetTrigger("GrenadeThrow");
     }
 
-    private void MoveAction_OnStartMoving(object sender, EventArgs e) { animator.SetBool("IsWalking", true); }
+    private void MoveAction_OnStartMoving(object sender, EventArgs e) 
+    {
+        animator.SetBool("IsWalking", true); 
+    }
 
-    private void MoveAction_OnStopMoving(object sender, EventArgs e) { animator.SetBool("IsWalking", false); }
+    private void MoveAction_OnStopMoving(object sender, EventArgs e)
+    {
+        animator.SetBool("IsWalking", false);
+    }
 
     private void ShootAction_OnShoot(object sender, ShootAction.OnShootEventArgs e)
     {
