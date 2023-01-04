@@ -961,8 +961,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.5297135, y: 0.000000022047303, z: -0.000000013769246, w: 0.84817666}
-  m_LocalPosition: {x: 10.4, y: 12, z: 3.7100003}
+<<<<<<< HEAD
+  m_LocalRotation: {x: 0.16371007, y: -1e-45, z: -0, w: 0.9865085}
+  m_LocalPosition: {x: 10.4, y: 2, z: 3.7100003}
+=======
+  m_LocalRotation: {x: 0.52965987, y: 0.000000022046166, z: -0.0000000137665985, w: 0.84821016}
+  m_LocalPosition: {x: 10.4, y: 11.99615, z: 3.7100003}
+>>>>>>> b403cf9f1fab8d0d3fb65c74ff74746697301ccf
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1918,7 +1923,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 12, z: -2.86}
+<<<<<<< HEAD
+  m_FollowOffset: {x: 0, y: 2, z: -2.86}
+=======
+  m_FollowOffset: {x: 0, y: 11.99615, z: -2.86}
+>>>>>>> b403cf9f1fab8d0d3fb65c74ff74746697301ccf
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -3438,8 +3447,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782535246}
-  m_LocalRotation: {x: 0.5297135, y: 0.000000022047303, z: -0.000000013769246, w: 0.84817666}
-  m_LocalPosition: {x: 10.4, y: 12, z: 3.7100003}
+<<<<<<< HEAD
+  m_LocalRotation: {x: 0.16371007, y: -1e-45, z: -0, w: 0.9865085}
+  m_LocalPosition: {x: 10.4, y: 2, z: 3.7100003}
+=======
+  m_LocalRotation: {x: 0.52965987, y: 0.000000022046166, z: -0.0000000137665985, w: 0.84821016}
+  m_LocalPosition: {x: 10.4, y: 11.99615, z: 3.7100003}
+>>>>>>> b403cf9f1fab8d0d3fb65c74ff74746697301ccf
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3481,6 +3495,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UnitSword
+      objectReference: {fileID: 0}
+    - target: {fileID: 6790350070931863418, guid: fe7a1f36e00e8c746af4ab01b81f1dd5,
+        type: 3}
+      propertyPath: actionPoints
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6790350070931863419, guid: fe7a1f36e00e8c746af4ab01b81f1dd5,
         type: 3}
@@ -4293,7 +4312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bee62fe61f03247801f97a3d497040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hiddenUnits: 2
 --- !u!1 &2099365360
 GameObject:
   m_ObjectHideFlags: 0

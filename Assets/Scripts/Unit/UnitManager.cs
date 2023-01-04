@@ -5,8 +5,6 @@ using System;
 
 public class UnitManager : MonoBehaviour
 {
-    [SerializeField] private int hiddenUnits = 2;
-
     public static UnitManager Instance { get; private set; }
 
     public event EventHandler OnAllEnemiesDead;
@@ -57,7 +55,7 @@ public class UnitManager : MonoBehaviour
         if (unit.IsEnemy)
         {
             enemyUnits.Remove(unit);
-            if (enemyUnits.Count == 0 - hiddenUnits)
+            if (enemyUnits.Count == 0)
                 OnAllEnemiesDead?.Invoke(this, EventArgs.Empty);
         }
         else
@@ -71,6 +69,4 @@ public class UnitManager : MonoBehaviour
     public List<Unit> Units { get { return units; } }
     public List<Unit> FriendlyUnits { get { return friendlyUnits; } }
     public List<Unit> EnemyUnits { get { return enemyUnits; } }
-
-    public int HiddenUnits { get { return hiddenUnits; } set { hiddenUnits = value; } }
 }
