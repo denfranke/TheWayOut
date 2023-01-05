@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UnitCardsGridUI : MonoBehaviour
 {
+    [SerializeField] private Transform unitCardPref;
+
     void Start()
     {
         List<UnitCard> unitCards = new List<UnitCard>();
@@ -12,13 +14,10 @@ public class UnitCardsGridUI : MonoBehaviour
 
         foreach (UnitCard unitCard in unitCards)
         {
-            GameObject unitCardInstance = new GameObject();
-            Image image = unitCardInstance.AddComponent<Image>();
+            GameObject unitCardSlotInstance = Instantiate(unitCardPref, transform).gameObject;
 
+            Image image = unitCardSlotInstance.transform.GetChild(0).GetComponent<Image>();
             image.sprite = unitCard.sprite;
-
-            unitCardInstance.GetComponent<RectTransform>().SetParent(transform);
-            unitCardInstance.GetComponent<RectTransform>().localScale = new Vector2(1, 1);
         }
     }
 }
