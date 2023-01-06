@@ -6,23 +6,26 @@ using System;
 
 public class UnitCardSlot : MonoBehaviour, IDropHandler
 {
-    public static event EventHandler<OnAnyDropToSlotEventArgs> OnAnyDropToSlot;
-
-    public class OnAnyDropToSlotEventArgs : EventArgs
-    {
-        public RectTransform rectTransformCard;
-        public RectTransform rectTransformSlot;
-    }
+    DragDropCard firstDragDropCard;
 
     public void OnDrop(PointerEventData eventData)
     { 
-        if(eventData.pointerDrag != null)
+        if(transform.childCount == 0)
         {
-            OnAnyDropToSlot?.Invoke(this, new OnAnyDropToSlotEventArgs
-            {
-                rectTransformCard = eventData.pointerDrag.GetComponent<RectTransform>(),
-                rectTransformSlot = GetComponent<RectTransform>()
-            });
+            firstDragDropCard = eventData.pointerDrag.GetComponent<DragDropCard>();
+            firstDragDropCard.HasDropped = true;
+            firstDragDropCard.ParentAfterDrag = transform;
+        }
+        else
+        {
+            DragDropCard secondDragDropCard = eventData.pointerDrag.GetComponent<DragDropCard>();
+            secondDragDropCard.HasDropped = true;
+            secondDragDropCard.ParentAfterDrag = transform;
+
+            firstDragDropCard.HasDropped = false;
+            firstDragDropCard.transform.SetParent(firstDragDropCard.InitialParent, true);
+
+            firstDragDropCard = secondDragDropCard;
         }
     }
 }
