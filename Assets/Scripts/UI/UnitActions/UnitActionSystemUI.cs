@@ -52,6 +52,9 @@ public class UnitActionSystemUI : MonoBehaviour
 
         Unit selectedUnit = UnitActionSystem.Instance.SelectedUnit;
 
+        if (!selectedUnit)
+            return;
+
         foreach(BaseAction baseAction in selectedUnit.BaseActions)
         {
             Transform actionButton = Instantiate(actionButtonPref, actionButtonsContainer);
@@ -85,6 +88,10 @@ public class UnitActionSystemUI : MonoBehaviour
     private void UpdateActionPoints()
     {
         Unit selectedUnit = UnitActionSystem.Instance.SelectedUnit;
+
+        if (!selectedUnit)
+            return;
+
         actionPoints.text = $"Action points: {selectedUnit.ActionPoints}";
     }
 

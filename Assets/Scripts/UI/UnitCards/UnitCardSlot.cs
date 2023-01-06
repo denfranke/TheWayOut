@@ -6,7 +6,9 @@ using System;
 
 public class UnitCardSlot : MonoBehaviour, IDropHandler
 {
-    DragDropCard firstDragDropCard;
+    private DragDropCard firstDragDropCard;
+
+    public Vector2 position;
 
     public void OnDrop(PointerEventData eventData)
     { 
@@ -28,4 +30,6 @@ public class UnitCardSlot : MonoBehaviour, IDropHandler
             firstDragDropCard = secondDragDropCard;
         }
     }
+
+    public DragDropCard FirstDragDropCard { get { return firstDragDropCard; } }
 }

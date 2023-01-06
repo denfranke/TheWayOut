@@ -37,6 +37,11 @@ public class LevelGrid : MonoBehaviour
         Pathfinding.Instance.Setup(width, height, cellSize);
     }
 
+    public void SpawnUnitAtGridPosition(GridPosition gridPosition, Transform unit)
+    {
+        Instantiate(unit, GetWorldPosition(gridPosition), Quaternion.identity);
+    }
+
     public void AddUnitAtGridPosition(GridPosition gridPosition, Unit unit)
     {
         GridObject gridObject = gridSystem.GetGridObject(gridPosition);

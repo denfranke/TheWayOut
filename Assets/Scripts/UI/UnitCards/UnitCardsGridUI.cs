@@ -14,9 +14,12 @@ public class UnitCardsGridUI : MonoBehaviour
 
         foreach (UnitCard unitCard in unitCards)
         {
-            GameObject unitCardSlotInstance = Instantiate(unitCardPref, transform).gameObject;
+            Transform unitCardSlotInstance = Instantiate(unitCardPref, transform);
 
-            Image image = unitCardSlotInstance.transform.GetChild(0).GetComponent<Image>();
+            DragDropCard dragDropCard = unitCardSlotInstance.GetChild(0).GetComponent<DragDropCard>();
+            dragDropCard.UnitCardPref = unitCard.unitPref;
+
+            Image image = unitCardSlotInstance.GetChild(0).GetComponent<Image>();
             image.sprite = unitCard.sprite;
         }
     }

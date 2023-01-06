@@ -6,6 +6,7 @@ using System;
 
 public class DragDropCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    private Transform unitCardPref;
     private Canvas canvas;
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
@@ -42,7 +43,7 @@ public class DragDropCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
-        if(hasDropped)
+        if (hasDropped)
             transform.SetParent(parentAfterDrag, true);
         else
             transform.SetParent(initialParent, true);
@@ -55,4 +56,6 @@ public class DragDropCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     public Transform InitialParent { get { return initialParent; } }
 
     public bool HasDropped { get { return hasDropped; } set { hasDropped = value; } }
+
+    public Transform UnitCardPref { get { return unitCardPref; } set { unitCardPref = value; } }
 }

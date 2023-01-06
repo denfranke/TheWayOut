@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AccountUnitsManager : MonoBehaviour
 {
+    [SerializeField] private Transform warriorUnitPref;
+    [SerializeField] private Transform shooterUnitPref;
+
     public static AccountUnitsManager Instance { get; private set; }
 
     private void Awake()
@@ -21,16 +24,15 @@ public class AccountUnitsManager : MonoBehaviour
     public List<UnitCard> GetUnitsOnAccount()
     {
         List<UnitCard> unitCards = new List<UnitCard>();
-        unitCards.Add(CreateUnitCard("Warrior"));
-        unitCards.Add(CreateUnitCard("Shooter"));
-        unitCards.Add(CreateUnitCard("Warrior"));
-        unitCards.Add(CreateUnitCard("Shooter"));
-        unitCards.Add(CreateUnitCard("Warrior"));
-        unitCards.Add(CreateUnitCard("Warrior"));
-        unitCards.Add(CreateUnitCard("Shooter"));
-        unitCards.Add(CreateUnitCard("Warrior"));
-        unitCards.Add(CreateUnitCard("Shooter"));
-        unitCards.Add(CreateUnitCard("Warrior"));
+        unitCards.Add(CreateUnitCard("Warrior", warriorUnitPref));
+        unitCards.Add(CreateUnitCard("Shooter", shooterUnitPref));
+        unitCards.Add(CreateUnitCard("Warrior", warriorUnitPref));
+        unitCards.Add(CreateUnitCard("Warrior", warriorUnitPref));
+        unitCards.Add(CreateUnitCard("Shooter", shooterUnitPref));
+        unitCards.Add(CreateUnitCard("Warrior", warriorUnitPref));
+        unitCards.Add(CreateUnitCard("Warrior", warriorUnitPref));
+        unitCards.Add(CreateUnitCard("Shooter", shooterUnitPref));
+        unitCards.Add(CreateUnitCard("Warrior", warriorUnitPref));
 
         return unitCards;
     }
@@ -44,12 +46,13 @@ public class AccountUnitsManager : MonoBehaviour
         return sprite;
     }
 
-    private UnitCard CreateUnitCard(string unitName)
+    private UnitCard CreateUnitCard(string unitName, Transform unitPref)
     {
         UnitCard unitCard = new UnitCard
         {
             name = unitName,
-            sprite = CreateSprite(unitName)
+            sprite = CreateSprite(unitName),
+            unitPref = unitPref
         };
 
         return unitCard;

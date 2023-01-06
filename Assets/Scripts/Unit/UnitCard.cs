@@ -6,4 +6,5 @@ public class UnitCard
 {
     public string name;
     public Sprite sprite;
+    public Transform unitPref;
 }
